@@ -15,7 +15,7 @@ dynamic_plotting(poses)
 "
 
 You will see that the arm is making some subtle movement.
-I am not sure if that visualization represents reality, but it looks plausible for now.
+I am not sure if that visualization represents reality, but it looks convincing for now.
 
 All the joint are labelled like in the manual: http://sdk.rethinkrobotics.com/wiki/Hardware_Specifications
 
