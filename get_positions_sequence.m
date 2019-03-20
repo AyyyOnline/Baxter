@@ -3,7 +3,7 @@ function poses = get_positions_sequence(data, arm, tip, base)
 
 if strcmp(arm, "left")
     angle_sequence = data(2:size(data,1), 2:8);
-else
+elseif strcmp(arm, "right")
     angle_sequence = data(2:size(data,1), 10:16);
 end
 
