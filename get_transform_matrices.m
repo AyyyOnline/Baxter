@@ -1,12 +1,24 @@
-function transforms = dh_transform_matrix(angles, marker_length)
+function transforms = get_transform_matrices(angles)
 
 % EDITED: combined with "get_parameters" function
+% EDITED: renamed from "dh_transform_matrix"
 %
 % Description
+%   Given the angles for each joint, produce transform matrices.
 %
+% Inputs:
+%   angles: a horizontal matrix where each element is an angle for a joint
+%
+% Output:
+%   transforms: a matrix that comprises transform matrixes for each joint
+%   (stacked vertically). Since each transformation matrix is 4x4, then the
+%   final matrix will be 4*7x4 (7 times higher)
+
+
+% Marker length (m) is constant (not passed to the the function by user)
+m = 0.16;
 
 ang = angles;
-m = marker_length;
 % Get the dh parameters for each joint.
      %d          r       theta       alpha
 dh = [0.27035    0.069   ang(1)      -pi/2;...
