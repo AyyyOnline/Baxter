@@ -17,7 +17,7 @@ function poses = get_joint_positions(trans_matrices)
 % Safe the number of rows of the "trans_matrices" matrix.
 % Number of joint is always 7 for Baxter.
 transform_rows = 7 * 4;
-compounf
+
 % Matrix for positions. First point is S0 that is assumed to be at the
 % origin.
 poses = [0;0;0];

@@ -1,5 +1,9 @@
 function dynamic_plotting(positions)
 
+% EDITED: 
+%   Calculate the intersectionMatrix inside this function. This way, it
+%   will only require to run one function in the command window.
+%
 % Description:
 %   Given the positions of joints in time, draws and animates Baxter's arm.
 %   Also, given the intersection points and lines matrix, draws those
@@ -30,6 +34,7 @@ function dynamic_plotting(positions)
 %   plots and animates the arm, table and the drawing produced.
 
 
+
 % First row is x-coords, second - y-coords, third - z-coords.
 poses = positions;
 joints = 7;
@@ -37,14 +42,26 @@ joints = 7;
 % "size(poses, 1)" returns a number of rows in matrix "poses"
 times = size(poses,1) / 4;
 
+% Create an animated line for Baxter's arm.
+armCurve = animatedline('Marker', 'o');
+
 % Table height. It is calculated relative to the height of S0 joint.
 s0 = 1.14;          % S0 height from the floor.
 table = 0.73;       % table height from the floor.   
 table = table - s0; % height relative to S0.
 
+% Space constrains for 3D plotting space.
+xMin = -0.2;    xMax = 1.2;
+yMin = -1;      yMax = 1;
+zMin = table;   zMax = table + 1.5;
+
+% Intersection plotting variables.
+new_line = 0;
+discard = 0;
+drawingCurve = animatedLine();
+
 % Get the matrix that hold the information about marker-table intersection
-% at each point in time: the intersection check and intersection
-% coordinates.
+% at each point in time: the inte
 intersectMatrix = [];
 for t = 1:3:times
     w2 = poses(t:t+2, 6);
@@ -52,21 +69,6 @@ for t = 1:3:times
     intersectMatrix = [intersectMatrix; get_intersections(w2, tip, table)];
 end
 
-% Space constrains for 3D plotting space.
-xMin = -0.2;    xMax = 1.2;
-yMin = -1;      yMax = 1;
-zMin = table;   zMax = table + 1.5;
-
-% Create an animated line for Baxter's arm.
-armCurve = animatedline('Marker', 'o');
-
-% Intersection plotting variables.
-new_line = 0;
-discard = 0;
-drawingCurve = animatedLine();
-
-
-% The main plotting loop.
 for t = 1:3:times
     pos = poses(t:t+2, 1:joints);
     
